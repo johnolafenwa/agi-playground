@@ -152,6 +152,7 @@ class Trainer():
 
         test_env = gym.make(self.env_name, render_mode="human")
 
+        # get the initial state
         state, info = test_env.reset()
 
         rewards = 0.0
@@ -159,10 +160,16 @@ class Trainer():
         done = False
 
         while not done:
+
             state = torch.tensor(state, dtype=torch.float32, device=self.device)
+
+            # get the action predictions
             pred_actions = self.policy(state)
+
+            # take the action with the highest probability
             pred_action = pred_actions.argmax(dim=-1)
 
+            # take the action in the env
             next_state, reward, terminated, truncated, info = test_env.step(pred_action.item())
 
             rewards += reward
