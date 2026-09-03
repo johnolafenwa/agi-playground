@@ -1,0 +1,35 @@
+[project]
+name = "rl-presentation"
+version = "0.1.0"
+description = "GRPO training experiments with Hugging Face Transformers"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+
+dependencies = [
+    "torch==2.13.0",
+    "transformers>=5.15.1,<5.16",
+    "datasets>=5.0.1,<6.0",
+
+    "flash-linear-attention[cuda]>=0.5.2,<0.6",
+    "kernels>=0.16.1,<0.17",
+
+    "tensorboard>=2.21.0,<3.0",
+    "wandb>=0.28.2,<0.29",
+    "tqdm>=4.70.0,<5.0",
+    "math-verify",
+    "matplotlib"
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.0.0,<8.0",
+    "jupyterlab>=4.4.0,<5.0",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu129"
+url = "https://download.pytorch.org/whl/cu129"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu129" }
